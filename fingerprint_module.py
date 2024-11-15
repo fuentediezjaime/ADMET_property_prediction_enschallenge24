@@ -25,4 +25,8 @@ def generate_morgan_fp(dataset_df, radius, bits):
 def filter_labels(y_labels, dataset_df): #selects the labes of only those smiles that converted
     # Perform the conversion to get indexes
     mol_tuples = generate_mol_object(dataset_df)
-    idxs = []
+
+    #In numpy (for everyone's sanity) extract the features corresponding to well converted smiles
+    y_labels_numpy = y_labels.to_numpy()
+    selected_y = [y_labels_numpy[i] for i, _ in mol_tuples]
+    return selected_y
